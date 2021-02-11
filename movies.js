@@ -55,7 +55,7 @@ window.addEventListener('DOMContentLoaded', async function(event) {
   for(let i = 0; i < numMovies; i++) {
 
     let movieId = movies[i].id
-    let movieTitle = movies[i].original_title
+    // let movieTitle = movies[i].original_title
     let movieImage = movies[i].poster_path
 
     
@@ -69,10 +69,9 @@ window.addEventListener('DOMContentLoaded', async function(event) {
     
     // conditionally make the movie opaque if already in the database (in the 'watched' collection)
     let watchedMovie = await db.collection('watched').doc(`${movieId}`).get()
-    if(watchedMovie.exists){
+    if(watchedMovie.data()){
       document.querySelector(`.movie-${movieId}`).classList.add('opacity-20')
-    } else {
-    }
+    } 
     
     // other attempt at conditional; seems to run faster but is less succinct?
     // for(let i = 0; i < moviesWatched.length; i++) {
